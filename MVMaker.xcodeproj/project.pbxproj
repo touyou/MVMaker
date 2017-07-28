@@ -13,6 +13,8 @@
 		464D5E311F2B0FF200CD2956 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D5E2F1F2B0FF200CD2956 /* LaunchScreen.storyboard */; };
 		464D5E391F2B103800CD2956 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D5E381F2B103800CD2956 /* MainViewController.swift */; };
 		464D5E3B1F2B104A00CD2956 /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D5E3A1F2B104A00CD2956 /* MainViewController.storyboard */; };
+		464D5E401F2B135A00CD2956 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D5E3F1F2B135A00CD2956 /* CircleImageView.swift */; };
+		464D5E441F2B189D00CD2956 /* MovieEditingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D5E431F2B189D00CD2956 /* MovieEditingButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		464D5E321F2B0FF200CD2956 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		464D5E381F2B103800CD2956 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		464D5E3A1F2B104A00CD2956 /* MainViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainViewController.storyboard; sourceTree = "<group>"; };
+		464D5E3F1F2B135A00CD2956 /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleImageView.swift; path = Views/CircleImageView.swift; sourceTree = "<group>"; };
+		464D5E431F2B189D00CD2956 /* MovieEditingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieEditingButton.swift; path = Views/MovieEditingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		464D5E251F2B0FF200CD2956 /* MVMaker */ = {
 			isa = PBXGroup;
 			children = (
+				464D5E3E1F2B132700CD2956 /* Views */,
 				464D5E3D1F2B109300CD2956 /* Assets */,
 				464D5E3C1F2B107E00CD2956 /* ViewControllers */,
 				464D5E261F2B0FF200CD2956 /* AppDelegate.swift */,
@@ -71,7 +76,6 @@
 				464D5E3A1F2B104A00CD2956 /* MainViewController.storyboard */,
 				464D5E381F2B103800CD2956 /* MainViewController.swift */,
 			);
-			name = ViewControllers;
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
@@ -81,8 +85,16 @@
 				464D5E2D1F2B0FF200CD2956 /* Assets.xcassets */,
 				464D5E2A1F2B0FF200CD2956 /* Prototype.storyboard */,
 			);
-			name = Assets;
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		464D5E3E1F2B132700CD2956 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				464D5E3F1F2B135A00CD2956 /* CircleImageView.swift */,
+				464D5E431F2B189D00CD2956 /* MovieEditingButton.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,7 +172,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				464D5E271F2B0FF200CD2956 /* AppDelegate.swift in Sources */,
+				464D5E401F2B135A00CD2956 /* CircleImageView.swift in Sources */,
 				464D5E391F2B103800CD2956 /* MainViewController.swift in Sources */,
+				464D5E441F2B189D00CD2956 /* MovieEditingButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +342,7 @@
 				464D5E371F2B0FF200CD2956 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
