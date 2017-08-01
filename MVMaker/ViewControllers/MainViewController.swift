@@ -7,29 +7,38 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Button
+    @IBAction func tappedStartButton() {
+        
+        let picker = MPMediaPickerController()
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
     }
-    */
+}
 
+extension MainViewController: MPMediaPickerControllerDelegate {
+    
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+        
+        guard let media = mediaItemCollection.items.first else {
+            return
+        }
+        
+        dismiss(animated: true, completion: {
+            
+            self.performSegue(withIdentifier: "", sender: media)
+        })
+    }
 }
