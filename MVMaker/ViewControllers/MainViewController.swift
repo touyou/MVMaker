@@ -38,7 +38,13 @@ extension MainViewController: MPMediaPickerControllerDelegate {
         
         dismiss(animated: true, completion: {
             
-            self.performSegue(withIdentifier: "", sender: media)
+            MusicManager.shared.music = media
+            self.performSegue(withIdentifier: "toConfirmViewController", sender: nil)
         })
+    }
+    
+    func mediaPickerDidCancel(_ mediaPicker: MPMediaPickerController) {
+        
+        dismiss(animated: true, completion: nil)
     }
 }

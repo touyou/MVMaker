@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="y40-yd-8aU">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Confirm View Controller-->
+        <scene sceneID="91g-q1-Mps">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="y40-yd-8aU" customClass="ConfirmViewController" customModule="MVMaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XUt-n6-iDz"/>
+                        <viewControllerLayoutGuide type="bottom" id="36a-jk-1nb"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="32f-Xo-6XC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lgi-hJ-ccl">
+                                <rect key="frame" x="46" y="140" width="283" height="387"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KTN-cK-rA4" customClass="CircleImageView" customModule="MVMaker" customModuleProvider="target">
+                                        <rect key="frame" x="66.5" y="40" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="ZlT-x5-Wcz"/>
+                                            <constraint firstAttribute="width" constant="150" id="taq-dY-y5o"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="75"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpc-Dm-T3O">
+                                        <rect key="frame" x="118" y="216" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="OK"/>
+                                        <connections>
+                                            <action selector="tappedOkButton" destination="y40-yd-8aU" eventType="touchUpInside" id="k3H-hN-Srv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgW-7p-re0">
+                                        <rect key="frame" x="99" y="277" width="84" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="tappedCancelButton" destination="y40-yd-8aU" eventType="touchUpInside" id="KAt-YQ-eNR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="KTN-cK-rA4" firstAttribute="centerX" secondItem="Lgi-hJ-ccl" secondAttribute="centerX" id="ehR-PM-ngz"/>
+                                    <constraint firstItem="KTN-cK-rA4" firstAttribute="top" secondItem="Lgi-hJ-ccl" secondAttribute="top" constant="40" id="zZs-dQ-6eL"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.10249779929577464" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lgi-hJ-ccl" firstAttribute="centerY" secondItem="32f-Xo-6XC" secondAttribute="centerY" id="LML-tf-gwb"/>
+                            <constraint firstItem="Lgi-hJ-ccl" firstAttribute="leading" secondItem="32f-Xo-6XC" secondAttribute="leadingMargin" constant="30" id="Mfc-X8-ANj"/>
+                            <constraint firstItem="Lgi-hJ-ccl" firstAttribute="top" secondItem="XUt-n6-iDz" secondAttribute="bottom" constant="120" id="UfL-3Z-z6R"/>
+                            <constraint firstItem="Lgi-hJ-ccl" firstAttribute="centerX" secondItem="32f-Xo-6XC" secondAttribute="centerX" id="kFG-a0-Zkn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="coverImageView" destination="KTN-cK-rA4" id="SCt-Sl-Tzr"/>
+                        <segue destination="pPI-FO-4IU" kind="presentation" identifier="toRecordingViewController" id="Pwi-dO-0uI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e0H-ax-5OK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="189.59999999999999" y="196.55172413793105"/>
+        </scene>
+        <!--RecordingViewController-->
+        <scene sceneID="Re7-gO-cU1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="RecordingViewController" id="pPI-FO-4IU" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nVE-8R-2qj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="836" y="196"/>
+        </scene>
+    </scenes>
+</document>
