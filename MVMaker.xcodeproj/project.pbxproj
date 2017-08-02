@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4615F6591F31C1920098443C /* VideoWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615F6581F31C1920098443C /* VideoWriter.swift */; };
+		4615F65B1F31C9FC0098443C /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615F65A1F31C9FC0098443C /* VideoManager.swift */; };
 		464D5E271F2B0FF200CD2956 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D5E261F2B0FF200CD2956 /* AppDelegate.swift */; };
 		464D5E2C1F2B0FF200CD2956 /* Prototype.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D5E2A1F2B0FF200CD2956 /* Prototype.storyboard */; };
 		464D5E2E1F2B0FF200CD2956 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464D5E2D1F2B0FF200CD2956 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4615F6581F31C1920098443C /* VideoWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoWriter.swift; path = Helper/VideoWriter.swift; sourceTree = "<group>"; };
+		4615F65A1F31C9FC0098443C /* VideoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoManager.swift; path = Helper/VideoManager.swift; sourceTree = "<group>"; };
 		464D5E231F2B0FF200CD2956 /* MVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D5E261F2B0FF200CD2956 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464D5E2B1F2B0FF200CD2956 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Prototype.storyboard; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				46F7651B1F30B2F600747652 /* MusicManager.swift */,
+				4615F6581F31C1920098443C /* VideoWriter.swift */,
+				4615F65A1F31C9FC0098443C /* VideoManager.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -196,7 +202,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4615F6591F31C1920098443C /* VideoWriter.swift in Sources */,
 				46F765171F30B17600747652 /* ConfirmViewController.swift in Sources */,
+				4615F65B1F31C9FC0098443C /* VideoManager.swift in Sources */,
 				464D5E271F2B0FF200CD2956 /* AppDelegate.swift in Sources */,
 				464D5E401F2B135A00CD2956 /* CircleImageView.swift in Sources */,
 				46F7651E1F30B91C00747652 /* RecordingViewController.swift in Sources */,
