@@ -28,8 +28,6 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func finish(_ segue: UIStoryboardSegue) {
-        
-        MusicManager.shared.music = nil
     }
 }
 

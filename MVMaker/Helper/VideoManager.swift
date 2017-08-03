@@ -158,14 +158,17 @@ extension VideoManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureA
             
             let isVideo = captureOutput is AVCaptureVideoDataOutput
             
-            if self.videoWriter == nil && !isVideo {
+            if self.videoWriter == nil && !isVideo,
+                let fmt = CMSampleBufferGetFormatDescription(sampleBuffer),
+                let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(fmt)
+            {
                 
-                let fmt = CMSampleBufferGetFormatDescription(sampleBuffer)
-                let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(fmt!)
                 
-                let channels = Int((asbd?.pointee.mChannelsPerFrame)!)
-                let samples = asbd?.pointee.mSampleRate
-                self.videoWriter = VideoWriter(height: height, width: width, channels: channels, samples: samples!)
+                
+                
+                let channels = Int(asbd.pointee.mChannelsPerFrame)
+                let samples = asbd.pointee.mSampleRate
+                self.videoWriter = VideoWriter(height: height, width: width, channels: channels, samples: samples)
                 self.videoWriter?.delegate = self
             }
             

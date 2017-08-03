@@ -14,6 +14,7 @@ class MusicManager: NSObject {
     static let shared = MusicManager()
     var music: MPMediaItem?
     private var mediaPlayer: AVAudioPlayer?
+    var count = 0
     
     var status: Bool {
         
@@ -31,11 +32,15 @@ class MusicManager: NSObject {
             
             if let mediaPlayer = mediaPlayer {
                 
-                mediaPlayer.play()
+                if count == 0 {
+                    
+                    mediaPlayer.play()
+                }
             } else if let url = music?.assetURL {
                 
                 mediaPlayer = try? AVAudioPlayer(contentsOf: url)
                 mediaPlayer?.numberOfLoops = 0
+                mediaPlayer?.delegate = self
                 mediaPlayer?.play()
             }
         }
@@ -55,5 +60,20 @@ class MusicManager: NSObject {
             
             mediaPlayer?.stop()
         }
+    }
+    
+    func clear() {
+        
+        mediaPlayer = nil
+        music = nil
+        count = 0
+    }
+}
+
+extension MusicManager: AVAudioPlayerDelegate {
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        
+        count += 1
     }
 }

@@ -63,7 +63,7 @@ class VideoWriter: NSObject {
         
         if CMSampleBufferDataIsReady(sample) {
             
-            if writer.status == AVAssetWriterStatus.unknown {
+            if isVideo && writer.status == AVAssetWriterStatus.unknown {
                 
                 let startTime = CMSampleBufferGetPresentationTimeStamp(sample)
                 writer.startWriting()

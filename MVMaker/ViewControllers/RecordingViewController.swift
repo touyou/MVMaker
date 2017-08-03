@@ -120,13 +120,14 @@ extension RecordingViewController: VideoManagerDelegate {
             let compositionSoundTrack = composition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
             // 音楽の早さは変えずに動画を基準にするため
             // 加えてここで最後の部分の音は保存する
+            print("video \(range.duration) sound: \(soundAsset.duration) \(range.duration > soundAsset.duration)")
             if range.duration > soundAsset.duration {
                 
                 let soundRange = CMTimeRange(start: kCMTimeZero, duration: soundAsset.duration)
                 try? compositionSoundTrack.insertTimeRange(soundRange, of: soundTrack, at: kCMTimeZero)
                 let audioRange = CMTimeRange(start: kCMTimeZero + soundAsset.duration, end: range.end)
                 let audioTrack = asset.tracks(withMediaType: AVMediaTypeAudio).first!
-                try? compositionAudioTrack.insertTimeRange(audioRange, of: audioTrack, at: kCMTimeZero)
+                try? compositionAudioTrack.insertTimeRange(audioRange, of: audioTrack, at: kCMTimeZero + soundAsset.duration)
             } else {
                 
                 try? compositionSoundTrack.insertTimeRange(range, of: soundTrack, at: kCMTimeZero)
@@ -175,6 +176,7 @@ extension RecordingViewController: VideoManagerDelegate {
                 let alert = UIAlertController(title: "アルバムに保存しますか？", message: "", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
                     
+                    MusicManager.shared.clear()
                     self?.performSegue(withIdentifier: "toMainViewController", sender: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] _ in
@@ -187,6 +189,7 @@ extension RecordingViewController: VideoManagerDelegate {
                         let alert = UIAlertController(title: "保存が完了しました。", message: "", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak self] _ in
                             
+                            MusicManager.shared.clear()
                             self?.performSegue(withIdentifier: "toMainViewController", sender: nil)
                         }))
                         self?.present(alert, animated: true, completion: nil)
