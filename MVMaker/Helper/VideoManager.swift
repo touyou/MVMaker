@@ -18,7 +18,6 @@ protocol VideoManagerDelegate: class {
 class VideoManager: NSObject {
     
     weak var delegate: VideoManagerDelegate?
-    fileprivate var recordingTime: Int64 = 0
     
     fileprivate var videoWriter: VideoWriter?
     
@@ -26,11 +25,16 @@ class VideoManager: NSObject {
     var width: Int = 1980
     let sessionPreset = AVCaptureSessionPresetHigh
     
-    func setup(previewView: UIImageView, recordingTime: Int64, completion: @escaping () -> Void) {
-        
-        self.recordingTime = recordingTime
-        
-        let captureSession = AVCaptureSession()
+    let lockQueue = DispatchQueue(label: "com.dev.touyou.LockQueue")
+    let recordingQueue = DispatchQueue(label: "com.dev.touyou.RecordingQueue")
+    var isCapturing = false
+    var isPaused = false
+    var isDiscontinue = false
+    var timeOffset = CMTimeMake(0, 0)
+    var lastAudioPts: CMTime?
+    let captureSession = AVCaptureSession()
+    
+    func setup(previewView: UIImageView, completion: @escaping () -> Void) {
         
         let videoDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         // framerate = 1/30
@@ -43,7 +47,8 @@ class VideoManager: NSObject {
         captureSession.addInput(audioInput)
         
         let videoDataOutput = AVCaptureVideoDataOutput()
-        videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        videoDataOutput.setSampleBufferDelegate(self, queue: recordingQueue)
+        videoDataOutput.alwaysDiscardsLateVideoFrames = true
         captureSession.addOutput(videoDataOutput)
         let videoConnection = videoDataOutput.connection(withMediaType: AVMediaTypeVideo)!
         videoConnection.videoOrientation = .landscapeRight
@@ -66,29 +71,77 @@ class VideoManager: NSObject {
         
         DispatchQueue.global(qos: .userInitiated).async {
             
-            captureSession.startRunning()
+            self.captureSession.startRunning()
         }
     }
     
-    func start() -> Bool {
+    func shutdown() {
         
-        guard let videoWriter = videoWriter else {
+        captureSession.stopRunning()
+    }
+    
+    func start() {
+        
+        lockQueue.sync {
             
-            return false
+            if !self.isCapturing {
+                
+                self.isPaused = false
+                self.isDiscontinue = false
+                self.isCapturing = true
+                self.timeOffset = CMTimeMake(0, 0)
+            }
         }
-        
-        videoWriter.start()
-        return true
-    }
-    
-    func pause() {
-        
-        videoWriter?.pause()
     }
     
     func stop() {
         
-        videoWriter?.stop()
+        lockQueue.sync {
+            
+            if self.isCapturing {
+                
+                self.isCapturing = false
+                self.videoWriter?.finish()
+            }
+        }
+    }
+    
+    func pause() {
+        
+        lockQueue.sync {
+            
+            self.isPaused = true
+            self.isDiscontinue = true
+        }
+    }
+    
+    func resume() {
+        
+        lockQueue.sync {
+            
+            if self.isCapturing {
+                
+                self.isPaused = false
+            }
+        }
+    }
+    
+    func ajustTimeStamp(_ sample: CMSampleBuffer, offset: CMTime) -> CMSampleBuffer {
+        
+        var count: CMItemCount = 0
+        CMSampleBufferGetSampleTimingInfoArray(sample, 0, nil, &count);
+        var info = [CMSampleTimingInfo](repeating: CMSampleTimingInfo(duration: CMTimeMake(0, 0), presentationTimeStamp: CMTimeMake(0, 0), decodeTimeStamp: CMTimeMake(0, 0)), count: count)
+        CMSampleBufferGetSampleTimingInfoArray(sample, count, &info, &count);
+        
+        for i in 0..<count {
+            
+            info[i].decodeTimeStamp = CMTimeSubtract(info[i].decodeTimeStamp, offset);
+            info[i].presentationTimeStamp = CMTimeSubtract(info[i].presentationTimeStamp, offset);
+        }
+        
+        var out: CMSampleBuffer?
+        CMSampleBufferCreateCopyWithNewTiming(nil, sample, count, &info, &out);
+        return out!
     }
 }
 
@@ -97,22 +150,73 @@ extension VideoManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureA
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         
-        let isVideo = captureOutput is AVCaptureVideoDataOutput
-        
-        if videoWriter == nil {
+        lockQueue.sync {
             
-            if !isVideo,
-                let fmt = CMSampleBufferGetFormatDescription(sampleBuffer),
-                let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(fmt) {
+            if !self.isCapturing || self.isPaused {
+                return
+            }
+            
+            let isVideo = captureOutput is AVCaptureVideoDataOutput
+            
+            if self.videoWriter == nil && !isVideo {
                 
-                let channels = Int(asbd.pointee.mChannelsPerFrame)
-                let samples = asbd.pointee.mSampleRate
-                self.videoWriter = VideoWriter(height: height, width: width, channels: channels, samples: samples, recordingTime: recordingTime)
+                let fmt = CMSampleBufferGetFormatDescription(sampleBuffer)
+                let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(fmt!)
+                
+                let channels = Int((asbd?.pointee.mChannelsPerFrame)!)
+                let samples = asbd?.pointee.mSampleRate
+                self.videoWriter = VideoWriter(height: height, width: width, channels: channels, samples: samples!)
                 self.videoWriter?.delegate = self
             }
+            
+            if self.isDiscontinue {
+                
+                if isVideo {
+                    
+                    return
+                }
+                
+                var pts = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+                
+                let isAudioPtsValid = self.lastAudioPts!.flags.intersection(CMTimeFlags.valid)
+                if isAudioPtsValid.rawValue != 0 {
+                    
+                    let isTimeOffsetPtsValid = self.timeOffset.flags.intersection(CMTimeFlags.valid)
+                    if isTimeOffsetPtsValid.rawValue != 0 {
+                        
+                        pts = CMTimeSubtract(pts, self.timeOffset);
+                    }
+                    let offset = CMTimeSubtract(pts, self.lastAudioPts!);
+                    
+                    if self.timeOffset.value == 0 {
+                        
+                        self.timeOffset = offset;
+                    } else {
+                        
+                        self.timeOffset = CMTimeAdd(self.timeOffset, offset);
+                    }
+                }
+                self.lastAudioPts!.flags = CMTimeFlags()
+                self.isDiscontinue = false
+            }
+            
+            var buffer = sampleBuffer
+            if self.timeOffset.value > 0 {
+                buffer = self.ajustTimeStamp(sampleBuffer, offset: self.timeOffset)
+            }
+            
+            if !isVideo {
+                var pts = CMSampleBufferGetPresentationTimeStamp(buffer!)
+                let dur = CMSampleBufferGetDuration(buffer!)
+                if (dur.value > 0)
+                {
+                    pts = CMTimeAdd(pts, dur)
+                }
+                self.lastAudioPts = pts
+            }
+            
+            self.videoWriter?.write(buffer!, isVideo: isVideo)
         }
-        
-        videoWriter?.write(sampleBuffer: sampleBuffer, isVideo: isVideo)
     }
 }
 

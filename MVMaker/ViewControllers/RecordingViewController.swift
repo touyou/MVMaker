@@ -20,7 +20,7 @@ class RecordingViewController: UIViewController {
     let musicManager = MusicManager.shared
     var videoManager: VideoManager?
     
-    fileprivate var recordingTime: Int64 = 100000000
+    var flag = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class RecordingViewController: UIViewController {
         indicator.activityIndicatorViewStyle = .whiteLarge
         indicator.center = view.center
         indicator.hidesWhenStopped = true
-        indicator.color = UIColor.black
+        indicator.color = UIColor.white
         view.addSubview(indicator)
         view.bringSubview(toFront: indicator)
         indicator.startAnimating()
@@ -47,24 +47,30 @@ class RecordingViewController: UIViewController {
     
     @IBAction func touchDownRecordButton() {
         
-        _ = videoManager?.start()
+        if flag {
+            
+            videoManager?.start()
+            flag = false
+        } else {
+            
+            videoManager?.resume()
+        }
         musicManager.play()
     }
     
     @IBAction func touchUpRecordButton() {
         
-        musicManager.pause()
         videoManager?.pause()
+        musicManager.pause()
     }
     
     @IBAction func tappedEndButton() {
         
         // MARK: indicator
-        indicator.color = UIColor.white
         indicator.startAnimating()
         
-        musicManager.stop()
         videoManager?.stop()
+        musicManager.stop()
     }
     
     // MARK: Setup Video
@@ -72,7 +78,7 @@ class RecordingViewController: UIViewController {
         
         videoManager = VideoManager()
         videoManager?.delegate = self
-        videoManager?.setup(previewView: videoView, recordingTime: recordingTime, completion: {
+        videoManager?.setup(previewView: videoView, completion: {
             
             self.indicator.stopAnimating()
         })

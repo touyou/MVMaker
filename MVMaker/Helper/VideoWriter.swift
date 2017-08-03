@@ -23,30 +23,7 @@ class VideoWriter: NSObject {
     fileprivate var videoInput: AVAssetWriterInput!
     fileprivate var audioInput: AVAssetWriterInput!
     
-    fileprivate var lastTime: CMTime!
-    fileprivate var offsetTime = kCMTimeZero
-    
-    fileprivate var _recordingTime: Int64 = 0
-    var recordingTime: CMTime {
-        
-        get {
-            
-            return CMTimeSubtract(lastTime, offsetTime)
-        }
-    }
-    
-    
-    fileprivate enum Status {
-        case start
-        case write
-        case pause
-        case restart
-        case end
-    }
-    fileprivate var status: Status = .start
-    
-    init(height: Int, width: Int, channels: Int, samples: Float64, recordingTime: Int64) {
-        self._recordingTime = recordingTime
+    init(height: Int, width: Int, channels: Int, samples: Float64) {
         
         // temporary files
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
@@ -82,73 +59,39 @@ class VideoWriter: NSObject {
         writer.add(audioInput)
     }
     
-    func write(sampleBuffer buff: CMSampleBuffer, isVideo: Bool) {
+    func write(_ sample: CMSampleBuffer, isVideo: Bool){
         
-        if status == .start || status == .end || status == .pause {
+        if CMSampleBufferDataIsReady(sample) {
             
-            return
-        }
-        
-        if status == .restart {
-            
-            let timeStamp = CMSampleBufferGetPresentationTimeStamp(buff)
-            let spanTime = CMTimeSubtract(timeStamp, lastTime)
-            offsetTime = CMTimeAdd(offsetTime, spanTime)
-            status = .write
-        }
-        
-        if CMSampleBufferDataIsReady(buff) {
-            
-            if isVideo && writer.status == .unknown {
+            if writer.status == AVAssetWriterStatus.unknown {
                 
-                offsetTime = CMSampleBufferGetPresentationTimeStamp(buff)
+                let startTime = CMSampleBufferGetPresentationTimeStamp(sample)
                 writer.startWriting()
-                writer.startSession(atSourceTime: kCMTimeZero)
+                writer.startSession(atSourceTime: startTime)
             }
             
-            if writer.status == .writing {
+            if writer.status == AVAssetWriterStatus.failed {
                 
-                // Offset分だけ調整
-                var copyBuffer: CMSampleBuffer?
-                var count: CMItemCount = 1
-                var info = CMSampleTimingInfo()
-                CMSampleBufferGetSampleTimingInfoArray(buff, count, &info, &count)
-                info.presentationTimeStamp = CMTimeSubtract(info.presentationTimeStamp, offsetTime)
-                CMSampleBufferCreateCopyWithNewTiming(kCFAllocatorDefault, buff, 1, &info, &copyBuffer)
-                // 最後のデータの時間を保存
-                lastTime = CMSampleBufferGetPresentationTimeStamp(buff)
+                return
+            }
+            
+            if isVideo {
                 
-                if recordingTime > CMTimeMake(Int64(_recordingTime), 1) {
+                if videoInput.isReadyForMoreMediaData {
                     
-                    writer.finishWriting {
-                        
-                        DispatchQueue.main.async {
-                            
-                            self.delegate?.finish(fileUrl: self.writer.outputURL)
-                        }
-                    }
-                    status = .end
-                    return
+                    videoInput.append(sample)
                 }
+            }else{
                 
-                if isVideo {
+                if audioInput.isReadyForMoreMediaData {
                     
-                    if videoInput.isReadyForMoreMediaData {
-                        
-                        videoInput.append(copyBuffer!)
-                    }
-                } else {
-                    
-                    if audioInput.isReadyForMoreMediaData {
-                        
-                        audioInput.append(copyBuffer!)
-                    }
+                    audioInput.append(sample)
                 }
             }
         }
     }
-    
-    func stop() {
+
+    func finish() {
         
         writer.finishWriting {
             
@@ -156,26 +99,6 @@ class VideoWriter: NSObject {
                 
                 self.delegate?.finish(fileUrl: self.writer.outputURL)
             }
-        }
-        status = .end
-    }
-    
-    func pause() {
-        
-        if status == .write {
-            
-            status = .pause
-        }
-    }
-    
-    func start() {
-        
-        if status == .start {
-            
-            status = .write
-        } else if status == .pause {
-            
-            status = .restart
         }
     }
 }

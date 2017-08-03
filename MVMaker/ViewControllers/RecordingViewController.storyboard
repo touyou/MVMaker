@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="78Z-Fs-MIe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mvmaker_background" translatesAutoresizingMaskIntoConstraints="NO" id="78Z-Fs-MIe">
                                 <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meQ-m5-cmO" customClass="MovieEditingButton" customModule="MVMaker" customModuleProvider="target">
@@ -97,4 +97,7 @@
             <point key="canvasLocation" x="109.29535232383809" y="85.599999999999994"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mvmaker_background" width="1800" height="1117"/>
+    </resources>
 </document>
