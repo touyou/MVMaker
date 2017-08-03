@@ -19,30 +19,41 @@ class MusicManager: NSObject {
         
         get {
             
-           return mediaPlayer?.isPlaying ?? false
+            return mediaPlayer?.isPlaying ?? false
         }
     }
     
+    let musicQueue = DispatchQueue(label: "com.dev.touyou.MusicQueue")
+    
     func play() {
         
-        if let mediaPlayer = mediaPlayer {
+        musicQueue.sync {
             
-            mediaPlayer.play()
-        } else if let url = music?.assetURL {
-            
-            mediaPlayer = try? AVAudioPlayer(contentsOf: url)
-            mediaPlayer?.numberOfLoops = 0
-            mediaPlayer?.play()
+            if let mediaPlayer = mediaPlayer {
+                
+                mediaPlayer.play()
+            } else if let url = music?.assetURL {
+                
+                mediaPlayer = try? AVAudioPlayer(contentsOf: url)
+                mediaPlayer?.numberOfLoops = 0
+                mediaPlayer?.play()
+            }
         }
     }
     
     func pause() {
         
-        mediaPlayer?.pause()
+        musicQueue.sync {
+            
+            mediaPlayer?.pause()
+        }
     }
     
     func stop() {
         
-        mediaPlayer?.stop()
+        musicQueue.sync {
+            
+            mediaPlayer?.stop()
+        }
     }
 }

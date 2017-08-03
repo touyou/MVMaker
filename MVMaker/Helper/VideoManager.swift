@@ -18,7 +18,6 @@ protocol VideoManagerDelegate: class {
 class VideoManager: NSObject {
     
     weak var delegate: VideoManagerDelegate?
-    fileprivate var recordingTime: Int64 = 0
     
     fileprivate var videoWriter: VideoWriter?
     
@@ -35,9 +34,7 @@ class VideoManager: NSObject {
     var lastAudioPts: CMTime?
     let captureSession = AVCaptureSession()
     
-    func setup(previewView: UIImageView, recordingTime: Int64, completion: @escaping () -> Void) {
-        
-        self.recordingTime = recordingTime
+    func setup(previewView: UIImageView, completion: @escaping () -> Void) {
         
         let videoDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         // framerate = 1/30
@@ -146,27 +143,6 @@ class VideoManager: NSObject {
         CMSampleBufferCreateCopyWithNewTiming(nil, sample, count, &info, &out);
         return out!
     }
-    
-    //    func start() -> Bool {
-    //
-    //        guard let videoWriter = videoWriter else {
-    //
-    //            return false
-    //        }
-    //
-    //        videoWriter.start()
-    //        return true
-    //    }
-    //
-    //    func pause() {
-    //
-    //        videoWriter?.pause()
-    //    }
-    //
-    //    func stop() {
-    //
-    //        videoWriter?.stop()
-    //    }
 }
 
 // MARK: - Sample Buffer Delegate
@@ -189,7 +165,7 @@ extension VideoManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureA
                 
                 let channels = Int((asbd?.pointee.mChannelsPerFrame)!)
                 let samples = asbd?.pointee.mSampleRate
-                self.videoWriter = VideoWriter(height: height, width: width, channels: channels, samples: samples!, recordingTime: recordingTime)
+                self.videoWriter = VideoWriter(height: height, width: width, channels: channels, samples: samples!)
                 self.videoWriter?.delegate = self
             }
             
@@ -241,23 +217,6 @@ extension VideoManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureA
             
             self.videoWriter?.write(buffer!, isVideo: isVideo)
         }
-        
-        //        let isVideo = captureOutput is AVCaptureVideoDataOutput
-        //
-        //        if videoWriter == nil {
-        //
-        //            if !isVideo,
-        //                let fmt = CMSampleBufferGetFormatDescription(sampleBuffer),
-        //                let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(fmt) {
-        //
-        //                let channels = Int(asbd.pointee.mChannelsPerFrame)
-        //                let samples = asbd.pointee.mSampleRate
-        //                self.videoWriter = VideoWriter(height: height, width: width, channels: channels, samples: samples, recordingTime: recordingTime)
-        //                self.videoWriter?.delegate = self
-        //            }
-        //        }
-        //
-        //        videoWriter?.write(sampleBuffer, isVideo: isVideo)
     }
 }
 
