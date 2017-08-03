@@ -20,6 +20,7 @@ class RecordingViewController: UIViewController {
     let musicManager = MusicManager.shared
     var videoManager: VideoManager?
     
+    var flag = true
     fileprivate var recordingTime: Int64 = 100000000
 
     override func viewDidLoad() {
@@ -47,7 +48,14 @@ class RecordingViewController: UIViewController {
     
     @IBAction func touchDownRecordButton() {
         
-        _ = videoManager?.start()
+        if flag {
+            
+            videoManager?.start()
+            flag = false
+        } else {
+            
+            videoManager?.resume()
+        }
         musicManager.play()
     }
     
