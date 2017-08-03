@@ -11,6 +11,54 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Tutorial View Controller-->
+        <scene sceneID="djD-0Z-fQb">
+            <objects>
+                <viewController id="q45-wh-zCu" customClass="TutorialViewController" customModule="MVMaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="96x-Oj-yVi"/>
+                        <viewControllerLayoutGuide type="bottom" id="wq0-Nj-OQw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JGq-Iy-85l">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSX-Pb-Mja">
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="325"/>
+                                <connections>
+                                    <segue destination="0GB-pz-2Zr" kind="embed" id="Lly-2H-ay3"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Drn-sz-Vwg">
+                                <rect key="frame" x="0.0" y="325" width="667" height="50"/>
+                                <color key="backgroundColor" red="0.8462415337562561" green="0.28384819626808167" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="k5z-7g-txm"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="okButton" destination="q45-wh-zCu" eventType="touchUpInside" id="eVe-iO-PJx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dSX-Pb-Mja" secondAttribute="trailing" id="4r1-c6-4jt"/>
+                            <constraint firstItem="dSX-Pb-Mja" firstAttribute="top" secondItem="JGq-Iy-85l" secondAttribute="top" id="DJN-It-zsu"/>
+                            <constraint firstItem="dSX-Pb-Mja" firstAttribute="leading" secondItem="JGq-Iy-85l" secondAttribute="leading" id="SYH-Z5-5OE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Drn-sz-Vwg" secondAttribute="trailing" constant="-20" id="Ur0-M4-O6f"/>
+                            <constraint firstItem="Drn-sz-Vwg" firstAttribute="leading" secondItem="JGq-Iy-85l" secondAttribute="leadingMargin" constant="-20" id="V8h-0U-YTa"/>
+                            <constraint firstItem="Drn-sz-Vwg" firstAttribute="top" secondItem="dSX-Pb-Mja" secondAttribute="bottom" id="Yaj-vM-hhS"/>
+                            <constraint firstItem="wq0-Nj-OQw" firstAttribute="top" secondItem="Drn-sz-Vwg" secondAttribute="bottom" id="dqb-q4-NqZ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UEt-EL-loZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-115.59220389805098" y="-706.39999999999998"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="bPm-eg-x72">
             <objects>
@@ -49,7 +97,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="tappedStartButton" destination="e9C-d1-O2A" eventType="touchUpInside" id="7vJ-kN-02y"/>
+                                    <action selector="tappedTutorialButton" destination="e9C-d1-O2A" eventType="touchUpInside" id="s4G-T0-GX8"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -72,11 +120,52 @@
                     </view>
                     <connections>
                         <segue destination="dt4-LV-eqn" kind="presentation" identifier="toConfirmViewController" id="17k-PB-BRf"/>
+                        <segue destination="q45-wh-zCu" kind="presentation" identifier="toTutorialViewController" id="4nn-nk-Jaf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6h-1o-Z9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-114.69265367316342" y="37.600000000000001"/>
+        </scene>
+        <!--Tutorial Page View Controller-->
+        <scene sceneID="p2O-8I-PLb">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="0GB-pz-2Zr" customClass="TutorialPageViewController" customModule="MVMaker" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nX7-Tl-AMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="604" y="-706"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="yTh-1K-efF">
+            <objects>
+                <viewController storyboardIdentifier="PageViewController" id="IEe-bq-AOC" customClass="PageViewController" customModule="MVMaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gAG-Hy-6mG"/>
+                        <viewControllerLayoutGuide type="bottom" id="vH4-aU-SDF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QDh-cx-hY2">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lVb-q2-CYe">
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lVb-q2-CYe" secondAttribute="trailing" id="OHu-Mu-MVZ"/>
+                            <constraint firstItem="vH4-aU-SDF" firstAttribute="top" secondItem="lVb-q2-CYe" secondAttribute="bottom" id="Oca-nh-y7W"/>
+                            <constraint firstItem="lVb-q2-CYe" firstAttribute="leading" secondItem="QDh-cx-hY2" secondAttribute="leading" id="X5n-22-qqW"/>
+                            <constraint firstItem="lVb-q2-CYe" firstAttribute="top" secondItem="QDh-cx-hY2" secondAttribute="top" id="nYh-kJ-qG3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="lVb-q2-CYe" id="Nnl-GT-kgX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A9l-H6-PPo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1245.4272863568217" y="-682.39999999999998"/>
         </scene>
         <!--ConfirmViewController-->
         <scene sceneID="oY4-IV-Jdj">

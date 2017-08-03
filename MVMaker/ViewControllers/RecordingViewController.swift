@@ -120,7 +120,6 @@ extension RecordingViewController: VideoManagerDelegate {
             let compositionSoundTrack = composition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
             // 音楽の早さは変えずに動画を基準にするため
             // 加えてここで最後の部分の音は保存する
-            print("video \(range.duration) sound: \(soundAsset.duration) \(range.duration > soundAsset.duration)")
             if range.duration > soundAsset.duration {
                 
                 let soundRange = CMTimeRange(start: kCMTimeZero, duration: soundAsset.duration)

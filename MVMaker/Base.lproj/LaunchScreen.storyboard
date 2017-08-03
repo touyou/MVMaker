@@ -23,6 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGT-sT-Pfc">
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="uQA-74-Tt9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                 <constraints>
@@ -36,10 +40,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="NGT-sT-Pfc" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="8Xg-AW-2e9"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="3EQ-tn-wPP" secondAttribute="bottom" constant="20" id="JcX-kt-Ld1"/>
+                            <constraint firstAttribute="trailing" secondItem="NGT-sT-Pfc" secondAttribute="trailing" id="Jd1-WZ-3pn"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="uQA-74-Tt9" secondAttribute="bottom" id="YHt-86-gd2"/>
+                            <constraint firstItem="NGT-sT-Pfc" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="eny-dd-Hb0"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="NGT-sT-Pfc" secondAttribute="bottom" id="gKN-RX-78u"/>
                             <constraint firstItem="uQA-74-Tt9" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="iSB-bS-iGI"/>
                             <constraint firstItem="uQA-74-Tt9" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="rVI-B1-jhF"/>
                             <constraint firstItem="3EQ-tn-wPP" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="uY0-tz-nGy"/>

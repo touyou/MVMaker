@@ -53,6 +53,9 @@ class VideoManager: NSObject {
         let videoConnection = videoDataOutput.connection(withMediaType: AVMediaTypeVideo)!
         videoConnection.videoOrientation = .landscapeRight
         
+        height = videoDataOutput.videoSettings["Height"] as! Int
+        width = videoDataOutput.videoSettings["Width"] as! Int
+        
         let audioDataOutput = AVCaptureAudioDataOutput()
         audioDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         captureSession.addOutput(audioDataOutput)
