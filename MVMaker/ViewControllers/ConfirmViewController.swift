@@ -11,18 +11,40 @@ import MediaPlayer
 
 class ConfirmViewController: UIViewController {
     
-    @IBOutlet weak var coverImageView: CircleImageView! {
+    @IBOutlet weak var coverImageView: CircleImageView!
+    @IBOutlet weak var titleLabel: UILabel! {
         
         didSet {
             
-            coverImageView.image = musicManager.music?.artwork?.image(at: coverImageView.bounds.size)
+            titleLabel.text = musicManager.music?.title
         }
     }
-
+    @IBOutlet weak var artistLabel: UILabel! {
+        
+        didSet {
+            
+            let artist = musicManager.music?.artist ?? "Unknown"
+            artistLabel.text = "Artist: \(artist)"
+        }
+    }
+    @IBOutlet weak var albumLabel: UILabel! {
+        
+        didSet {
+            
+            let albumTitle = musicManager.music?.albumTitle ?? "Unknown"
+            albumLabel.text = "Album: \(albumTitle)"
+        }
+    }
     let musicManager = MusicManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        coverImageView.image = musicManager.music?.artwork?.image(at: coverImageView.bounds.size)
     }
     
     override func didReceiveMemoryWarning() {

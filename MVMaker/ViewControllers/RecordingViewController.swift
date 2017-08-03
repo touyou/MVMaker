@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import AVKit
 import AVFoundation
 import MediaPlayer
+import Photos
 
 class RecordingViewController: UIViewController {
     
     @IBOutlet weak var videoView: UIImageView!
+    let indicator = UIActivityIndicatorView()
     
     let musicManager = MusicManager.shared
     var videoManager: VideoManager?
@@ -21,13 +24,22 @@ class RecordingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        indicator.activityIndicatorViewStyle = .whiteLarge
+        indicator.center = view.center
+        indicator.hidesWhenStopped = true
+        indicator.color = UIColor.black
+        view.addSubview(indicator)
+        view.bringSubview(toFront: indicator)
+        indicator.startAnimating()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
-        super.viewWillAppear(animated)
+        super.viewDidAppear(animated)
         
         setupVideo()
+        indicator.stopAnimating()
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,14 +54,18 @@ class RecordingViewController: UIViewController {
     
     @IBAction func touchUpRecordButton() {
         
-        videoManager?.pause()
         musicManager.pause()
+        videoManager?.pause()
     }
     
     @IBAction func tappedEndButton() {
         
-        videoManager?.stop()
+        // MARK: indicator
+        indicator.color = UIColor.white
+        indicator.startAnimating()
+        
         musicManager.stop()
+        videoManager?.stop()
     }
     
     // MARK: Setup Video
@@ -83,9 +99,11 @@ extension RecordingViewController: VideoManagerDelegate {
         let asset = AVURLAsset(url: fileUrl)
         let range = CMTimeRange(start: kCMTimeZero, duration: asset.duration)
         let videoTrack = asset.tracks(withMediaType: AVMediaTypeVideo).first!
-        let audioTrack = asset.tracks(withMediaType: AVMediaTypeAudio).first!
         try? compositionVideoTrack.insertTimeRange(range, of: videoTrack, at: kCMTimeZero)
-        try? compositionAudioTrack.insertTimeRange(range, of: audioTrack, at: kCMTimeZero)
+        if let audioTrack = asset.tracks(withMediaType: AVMediaTypeAudio).first {
+            
+            try? compositionAudioTrack.insertTimeRange(range, of: audioTrack, at: kCMTimeZero)
+        }
         let instruction = AVMutableVideoCompositionInstruction()
         instruction.timeRange = range
         let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: compositionVideoTrack)
@@ -138,7 +156,39 @@ extension RecordingViewController: VideoManagerDelegate {
                 
                 return
             }
-            // ここで遷移する
+
+            self?.indicator.stopAnimating()
+            let playerController = CustomAVPlayerViewController()
+            let url = URL(fileURLWithPath: outputPath)
+            let videoPlayer = AVPlayer(url: url)
+            playerController.player = videoPlayer
+            playerController.completion = { [weak self] in
+                
+                let alert = UIAlertController(title: "アルバムに保存しますか？", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] _ in
+                    
+                    self?.performSegue(withIdentifier: "toMainViewController", sender: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [weak self] _ in
+                    
+                    PHPhotoLibrary.shared().performChanges({
+                        
+                        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+                    }) { [weak self] _, _ in
+                        
+                        let alert = UIAlertController(title: "保存が完了しました。", message: "", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: {[weak self] _ in
+                            
+                            self?.performSegue(withIdentifier: "toMainViewController", sender: nil)
+                        }))
+                        self?.present(alert, animated: true, completion: nil)
+                    }
+                }))
+                
+                self?.present(alert, animated: true, completion: nil)
+            }
+            self?.present(playerController, animated: true, completion: nil)
         }
     }
 }
+

@@ -26,6 +26,11 @@ class MainViewController: UIViewController {
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
+    
+    @IBAction func finish(_ segue: UIStoryboardSegue) {
+        
+        MusicManager.shared.music = nil
+    }
 }
 
 extension MainViewController: MPMediaPickerControllerDelegate {

@@ -25,7 +25,10 @@ class MusicManager: NSObject {
     
     func play() {
         
-        if let url = music?.assetURL {
+        if let mediaPlayer = mediaPlayer {
+            
+            mediaPlayer.play()
+        } else if let url = music?.assetURL {
             
             mediaPlayer = try? AVAudioPlayer(contentsOf: url)
             mediaPlayer?.numberOfLoops = 0

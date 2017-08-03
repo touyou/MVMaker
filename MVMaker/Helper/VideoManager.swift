@@ -22,8 +22,8 @@ class VideoManager: NSObject {
     
     fileprivate var videoWriter: VideoWriter?
     
-    var height: Int = 1980
-    var width: Int = 1080
+    var height: Int = 1080
+    var width: Int = 1980
     let sessionPreset = AVCaptureSessionPresetHigh
     
     func setup(previewView: UIImageView, recordingTime: Int64) {
@@ -42,12 +42,23 @@ class VideoManager: NSObject {
         let audioInput = try! AVCaptureDeviceInput(device: audioDevice)
         captureSession.addInput(audioInput)
         
+        let videoDataOutput = AVCaptureVideoDataOutput()
+        videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        captureSession.addOutput(videoDataOutput)
+        let videoConnection = videoDataOutput.connection(withMediaType: AVMediaTypeVideo)!
+        videoConnection.videoOrientation = .landscapeRight
+        
+        let audioDataOutput = AVCaptureAudioDataOutput()
+        audioDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        captureSession.addOutput(audioDataOutput)
+        
         captureSession.sessionPreset = sessionPreset
         
         if let videoLayer = AVCaptureVideoPreviewLayer(session: captureSession) {
             
             videoLayer.frame = previewView.bounds
             videoLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+            videoLayer.connection.videoOrientation = .landscapeRight
             previewView.layer.addSublayer(videoLayer)
         }
         
@@ -86,7 +97,7 @@ extension VideoManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureA
         
         let isVideo = captureOutput is AVCaptureVideoDataOutput
         
-        if videoWriter != nil {
+        if videoWriter == nil {
             
             if !isVideo,
                 let fmt = CMSampleBufferGetFormatDescription(sampleBuffer),
@@ -104,7 +115,7 @@ extension VideoManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureA
             
             return
         }
-        
+
         videoWriter?.write(sampleBuffer: sampleBuffer, isVideo: isVideo)
     }
 }

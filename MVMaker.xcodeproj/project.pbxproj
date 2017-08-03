@@ -17,6 +17,7 @@
 		464D5E3B1F2B104A00CD2956 /* MainViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D5E3A1F2B104A00CD2956 /* MainViewController.storyboard */; };
 		464D5E401F2B135A00CD2956 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D5E3F1F2B135A00CD2956 /* CircleImageView.swift */; };
 		464D5E441F2B189D00CD2956 /* MovieEditingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D5E431F2B189D00CD2956 /* MovieEditingButton.swift */; };
+		465227781F32CC8D0050ED77 /* CustomAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465227771F32CC8D0050ED77 /* CustomAVPlayerViewController.swift */; };
 		46F765171F30B17600747652 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F765161F30B17600747652 /* ConfirmViewController.swift */; };
 		46F765191F30B18300747652 /* ConfirmViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46F765181F30B18300747652 /* ConfirmViewController.storyboard */; };
 		46F7651C1F30B2F600747652 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F7651B1F30B2F600747652 /* MusicManager.swift */; };
@@ -37,6 +38,7 @@
 		464D5E3A1F2B104A00CD2956 /* MainViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainViewController.storyboard; sourceTree = "<group>"; };
 		464D5E3F1F2B135A00CD2956 /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleImageView.swift; path = Views/CircleImageView.swift; sourceTree = "<group>"; };
 		464D5E431F2B189D00CD2956 /* MovieEditingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieEditingButton.swift; path = Views/MovieEditingButton.swift; sourceTree = "<group>"; };
+		465227771F32CC8D0050ED77 /* CustomAVPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAVPlayerViewController.swift; sourceTree = "<group>"; };
 		46F765161F30B17600747652 /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		46F765181F30B18300747652 /* ConfirmViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ConfirmViewController.storyboard; sourceTree = "<group>"; };
 		46F7651B1F30B2F600747652 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicManager.swift; path = Helper/MusicManager.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				46F765161F30B17600747652 /* ConfirmViewController.swift */,
 				46F7651F1F30B92900747652 /* RecordingViewController.storyboard */,
 				46F7651D1F30B91C00747652 /* RecordingViewController.swift */,
+				465227771F32CC8D0050ED77 /* CustomAVPlayerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				4615F65B1F31C9FC0098443C /* VideoManager.swift in Sources */,
 				464D5E271F2B0FF200CD2956 /* AppDelegate.swift in Sources */,
 				464D5E401F2B135A00CD2956 /* CircleImageView.swift in Sources */,
+				465227781F32CC8D0050ED77 /* CustomAVPlayerViewController.swift in Sources */,
 				46F7651E1F30B91C00747652 /* RecordingViewController.swift in Sources */,
 				464D5E391F2B103800CD2956 /* MainViewController.swift in Sources */,
 				464D5E441F2B189D00CD2956 /* MovieEditingButton.swift in Sources */,
