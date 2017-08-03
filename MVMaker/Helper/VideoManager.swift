@@ -26,7 +26,7 @@ class VideoManager: NSObject {
     var width: Int = 1980
     let sessionPreset = AVCaptureSessionPresetHigh
     
-    func setup(previewView: UIImageView, recordingTime: Int64) {
+    func setup(previewView: UIImageView, recordingTime: Int64, completion: @escaping () -> Void) {
         
         self.recordingTime = recordingTime
         
@@ -61,6 +61,8 @@ class VideoManager: NSObject {
             videoLayer.connection.videoOrientation = .landscapeRight
             previewView.layer.addSublayer(videoLayer)
         }
+        
+        completion()
         
         DispatchQueue.global(qos: .userInitiated).async {
             
@@ -110,12 +112,6 @@ extension VideoManager: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureA
             }
         }
         
-        // 音は音楽が再生されている間は保存しない
-        guard isVideo || !MusicManager.shared.status else {
-            
-            return
-        }
-
         videoWriter?.write(sampleBuffer: sampleBuffer, isVideo: isVideo)
     }
 }

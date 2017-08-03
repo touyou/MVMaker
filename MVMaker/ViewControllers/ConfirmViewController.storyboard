@@ -25,7 +25,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lgi-hJ-ccl">
                                 <rect key="frame" x="50" y="50" width="567" height="275"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KTN-cK-rA4" customClass="CircleImageView" customModule="MVMaker" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mvmaker" translatesAutoresizingMaskIntoConstraints="NO" id="KTN-cK-rA4" customClass="CircleImageView" customModule="MVMaker" customModuleProvider="target">
                                         <rect key="frame" x="30" y="40" width="150" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="ZlT-x5-Wcz"/>
@@ -38,28 +38,46 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgW-7p-re0">
-                                        <rect key="frame" x="439" y="225" width="48" height="30"/>
-                                        <state key="normal" title="Cancel"/>
+                                        <rect key="frame" x="433" y="230" width="54" height="35"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="tappedCancelButton" destination="y40-yd-8aU" eventType="touchUpInside" id="KAt-YQ-eNR"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="この曲でMVを撮りますか？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTo-za-NC2">
-                                        <rect key="frame" x="260" y="40" width="217" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="この曲でMusicVideoを撮りますか？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTo-za-NC2">
+                                        <rect key="frame" x="260" y="40" width="280" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpc-Dm-T3O">
-                                        <rect key="frame" x="517" y="225" width="30" height="30"/>
-                                        <state key="normal" title="OK"/>
+                                        <rect key="frame" x="517" y="230" width="30" height="35"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                        <state key="normal" title="OK">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
                                             <action selector="tappedOkButton" destination="y40-yd-8aU" eventType="touchUpInside" id="k3H-hN-Srv"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unknown" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxU-kg-jbU">
-                                        <rect key="frame" x="260" y="81" width="64.5" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <rect key="frame" x="260" y="81" width="297" height="19.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist: Unknown" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPY-9g-XSL">
+                                        <rect key="frame" x="260" y="106" width="297" height="19.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album: Unknown" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-P1-2oF">
+                                        <rect key="frame" x="260" y="130.5" width="289" height="19.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -69,38 +87,29 @@
                                     <constraint firstItem="KTo-za-NC2" firstAttribute="leading" secondItem="KTN-cK-rA4" secondAttribute="trailing" constant="80" id="4Qt-4V-5vV"/>
                                     <constraint firstItem="sxU-kg-jbU" firstAttribute="leading" secondItem="KTo-za-NC2" secondAttribute="leading" id="6kA-xK-xws"/>
                                     <constraint firstItem="KTN-cK-rA4" firstAttribute="leading" secondItem="Lgi-hJ-ccl" secondAttribute="leading" constant="30" id="9l9-2I-lqF"/>
+                                    <constraint firstItem="jPY-9g-XSL" firstAttribute="top" secondItem="sxU-kg-jbU" secondAttribute="bottom" constant="5" id="Kkl-SX-aZb"/>
+                                    <constraint firstItem="OLi-P1-2oF" firstAttribute="top" secondItem="jPY-9g-XSL" secondAttribute="bottom" constant="5" id="Set-JX-IHp"/>
                                     <constraint firstItem="KTo-za-NC2" firstAttribute="top" secondItem="KTN-cK-rA4" secondAttribute="top" id="T0i-rJ-9A6"/>
-                                    <constraint firstAttribute="bottom" secondItem="qpc-Dm-T3O" secondAttribute="bottom" constant="20" id="Upd-oC-GYG"/>
+                                    <constraint firstAttribute="bottom" secondItem="qpc-Dm-T3O" secondAttribute="bottom" constant="10" id="Upd-oC-GYG"/>
+                                    <constraint firstAttribute="trailing" secondItem="jPY-9g-XSL" secondAttribute="trailing" constant="10" id="Xt5-P6-PGp"/>
                                     <constraint firstAttribute="trailing" secondItem="qpc-Dm-T3O" secondAttribute="trailing" constant="20" id="Y7k-HD-5Vs"/>
+                                    <constraint firstItem="jPY-9g-XSL" firstAttribute="leading" secondItem="sxU-kg-jbU" secondAttribute="leading" id="c7U-LS-1iA"/>
                                     <constraint firstItem="qpc-Dm-T3O" firstAttribute="leading" secondItem="bgW-7p-re0" secondAttribute="trailing" constant="30" id="kZl-hR-Qah"/>
-                                    <constraint firstAttribute="bottom" secondItem="bgW-7p-re0" secondAttribute="bottom" constant="20" id="odb-76-p3n"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="OLi-P1-2oF" secondAttribute="trailing" constant="10" id="mV5-00-rq5"/>
+                                    <constraint firstItem="OLi-P1-2oF" firstAttribute="leading" secondItem="jPY-9g-XSL" secondAttribute="leading" id="oGA-hR-6sI"/>
+                                    <constraint firstAttribute="trailing" secondItem="sxU-kg-jbU" secondAttribute="trailing" constant="10" id="oTy-br-0ff"/>
+                                    <constraint firstAttribute="bottom" secondItem="bgW-7p-re0" secondAttribute="bottom" constant="10" id="odb-76-p3n"/>
                                     <constraint firstItem="sxU-kg-jbU" firstAttribute="top" secondItem="KTo-za-NC2" secondAttribute="bottom" constant="20" id="tAz-Ms-oMA"/>
                                     <constraint firstItem="KTN-cK-rA4" firstAttribute="top" secondItem="Lgi-hJ-ccl" secondAttribute="top" constant="40" id="zZs-dQ-6eL"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist: Unknown" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPY-9g-XSL">
-                                <rect key="frame" x="310" y="154" width="110" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album: Unknown" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-P1-2oF">
-                                <rect key="frame" x="310" y="177" width="116.5" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.10249779929577464" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Lgi-hJ-ccl" firstAttribute="centerY" secondItem="32f-Xo-6XC" secondAttribute="centerY" id="LML-tf-gwb"/>
-                            <constraint firstItem="OLi-P1-2oF" firstAttribute="leading" secondItem="jPY-9g-XSL" secondAttribute="leading" id="LRZ-9i-dyy"/>
                             <constraint firstItem="Lgi-hJ-ccl" firstAttribute="leading" secondItem="32f-Xo-6XC" secondAttribute="leadingMargin" constant="30" id="Mfc-X8-ANj"/>
                             <constraint firstItem="Lgi-hJ-ccl" firstAttribute="top" secondItem="XUt-n6-iDz" secondAttribute="bottom" constant="30" id="UfL-3Z-z6R"/>
-                            <constraint firstItem="jPY-9g-XSL" firstAttribute="leading" secondItem="sxU-kg-jbU" secondAttribute="leading" id="ZmG-MH-4zB"/>
-                            <constraint firstItem="jPY-9g-XSL" firstAttribute="top" secondItem="sxU-kg-jbU" secondAttribute="bottom" constant="5" id="bq4-Yy-Xwm"/>
                             <constraint firstItem="Lgi-hJ-ccl" firstAttribute="centerX" secondItem="32f-Xo-6XC" secondAttribute="centerX" id="kFG-a0-Zkn"/>
-                            <constraint firstItem="OLi-P1-2oF" firstAttribute="top" secondItem="jPY-9g-XSL" secondAttribute="bottom" constant="5" id="khr-cz-0hv"/>
                         </constraints>
                     </view>
                     <connections>
@@ -124,4 +133,7 @@
             <point key="canvasLocation" x="836" y="196"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="mvmaker" width="1025" height="1025"/>
+    </resources>
 </document>

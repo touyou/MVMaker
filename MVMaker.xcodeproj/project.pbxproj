@@ -10,7 +10,6 @@
 		4615F6591F31C1920098443C /* VideoWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615F6581F31C1920098443C /* VideoWriter.swift */; };
 		4615F65B1F31C9FC0098443C /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4615F65A1F31C9FC0098443C /* VideoManager.swift */; };
 		464D5E271F2B0FF200CD2956 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D5E261F2B0FF200CD2956 /* AppDelegate.swift */; };
-		464D5E2C1F2B0FF200CD2956 /* Prototype.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D5E2A1F2B0FF200CD2956 /* Prototype.storyboard */; };
 		464D5E2E1F2B0FF200CD2956 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 464D5E2D1F2B0FF200CD2956 /* Assets.xcassets */; };
 		464D5E311F2B0FF200CD2956 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 464D5E2F1F2B0FF200CD2956 /* LaunchScreen.storyboard */; };
 		464D5E391F2B103800CD2956 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464D5E381F2B103800CD2956 /* MainViewController.swift */; };
@@ -194,7 +193,6 @@
 				464D5E311F2B0FF200CD2956 /* LaunchScreen.storyboard in Resources */,
 				46F765191F30B18300747652 /* ConfirmViewController.storyboard in Resources */,
 				464D5E2E1F2B0FF200CD2956 /* Assets.xcassets in Resources */,
-				464D5E2C1F2B0FF200CD2956 /* Prototype.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

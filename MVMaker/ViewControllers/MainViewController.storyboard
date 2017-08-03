@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,21 +23,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mvmaker_background" translatesAutoresizingMaskIntoConstraints="NO" id="eJ9-ar-hsM">
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="yd3-0s-YXG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yd3-0s-YXG" secondAttribute="height" multiplier="375:375" id="9xG-V4-tbz"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISt-w5-Gxd">
-                                <rect key="frame" x="306" y="168.5" width="55" height="38"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="21"/>
+                                <rect key="frame" x="385" y="251" width="252" height="47"/>
+                                <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="27"/>
                                 <state key="normal" title="Start">
-                                    <color key="titleColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="tappedStartButton" destination="e9C-d1-O2A" eventType="touchUpInside" id="91h-9M-hZW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEp-qI-rnE">
+                                <rect key="frame" x="385" y="308" width="252" height="47"/>
+                                <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="27"/>
+                                <state key="normal" title="How to use">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedStartButton" destination="e9C-d1-O2A" eventType="touchUpInside" id="7vJ-kN-02y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="ISt-w5-Gxd" firstAttribute="centerY" secondItem="gQu-Ck-ZCI" secondAttribute="centerY" id="545-F1-7QV"/>
-                            <constraint firstItem="ISt-w5-Gxd" firstAttribute="centerX" secondItem="gQu-Ck-ZCI" secondAttribute="centerX" id="7Zg-Z9-Jlw"/>
+                            <constraint firstItem="HEp-qI-rnE" firstAttribute="leading" secondItem="yd3-0s-YXG" secondAttribute="trailing" constant="10" id="4Ym-d9-J11"/>
+                            <constraint firstItem="Y7O-Vt-wk1" firstAttribute="top" secondItem="yd3-0s-YXG" secondAttribute="bottom" id="4rY-RZ-oHU"/>
+                            <constraint firstItem="eJ9-ar-hsM" firstAttribute="leading" secondItem="gQu-Ck-ZCI" secondAttribute="leading" id="6l8-Ki-M3q"/>
+                            <constraint firstItem="yd3-0s-YXG" firstAttribute="top" secondItem="gQu-Ck-ZCI" secondAttribute="top" id="8Ts-6d-LCr"/>
+                            <constraint firstItem="eJ9-ar-hsM" firstAttribute="top" secondItem="gQu-Ck-ZCI" secondAttribute="top" id="8dZ-4y-mFG"/>
+                            <constraint firstAttribute="trailing" secondItem="eJ9-ar-hsM" secondAttribute="trailing" id="BvT-s7-tPD"/>
+                            <constraint firstItem="Y7O-Vt-wk1" firstAttribute="top" secondItem="HEp-qI-rnE" secondAttribute="bottom" constant="20" id="Dl0-zh-og7"/>
+                            <constraint firstItem="Y7O-Vt-wk1" firstAttribute="top" secondItem="eJ9-ar-hsM" secondAttribute="bottom" id="GMx-u8-C1f"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ISt-w5-Gxd" secondAttribute="trailing" constant="10" id="aTC-6l-Nnm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="HEp-qI-rnE" secondAttribute="trailing" constant="10" id="cgs-Mi-8Qu"/>
+                            <constraint firstItem="yd3-0s-YXG" firstAttribute="leading" secondItem="gQu-Ck-ZCI" secondAttribute="leading" id="kAB-Ri-TYh"/>
+                            <constraint firstItem="ISt-w5-Gxd" firstAttribute="leading" secondItem="yd3-0s-YXG" secondAttribute="trailing" constant="10" id="rMa-QW-LUv"/>
+                            <constraint firstItem="HEp-qI-rnE" firstAttribute="top" secondItem="ISt-w5-Gxd" secondAttribute="bottom" constant="10" id="vR7-Gy-oXd"/>
                         </constraints>
                     </view>
                     <connections>
@@ -44,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6h-1o-Z9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-114.40000000000001" y="39.130434782608695"/>
+            <point key="canvasLocation" x="-114.69265367316342" y="37.600000000000001"/>
         </scene>
         <!--ConfirmViewController-->
         <scene sceneID="oY4-IV-Jdj">
@@ -55,4 +87,8 @@
             <point key="canvasLocation" x="538" y="37"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="1024" height="1024"/>
+        <image name="mvmaker_background" width="1800" height="1117"/>
+    </resources>
 </document>

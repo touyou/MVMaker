@@ -76,13 +76,18 @@ class VideoWriter: NSObject {
             AVNumberOfChannelsKey: channels,
             AVSampleRateKey: samples,
             AVEncoderBitRateKey: 128000
-        ] as [String : Any]
+            ] as [String : Any]
         audioInput = AVAssetWriterInput(mediaType: AVMediaTypeAudio, outputSettings: audioOutputSettings)
         audioInput.expectsMediaDataInRealTime = true
         writer.add(audioInput)
     }
     
     func write(sampleBuffer buff: CMSampleBuffer, isVideo: Bool) {
+        
+        if status == .start || status == .end || status == .pause {
+            
+            return
+        }
         
         if status == .restart {
             
@@ -91,54 +96,53 @@ class VideoWriter: NSObject {
             offsetTime = CMTimeAdd(offsetTime, spanTime)
             status = .write
         }
-        guard status == .write && CMSampleBufferDataIsReady(buff) else {
-            
-            return
-        }
         
-        if isVideo && writer.status == .unknown {
+        if CMSampleBufferDataIsReady(buff) {
             
-            offsetTime = CMSampleBufferGetPresentationTimeStamp(buff)
-            writer.startWriting()
-            writer.startSession(atSourceTime: kCMTimeZero)
-        }
-        
-        if writer.status == .writing {
-            
-            // Offset分だけ調整
-            var copyBuffer: CMSampleBuffer?
-            var count: CMItemCount = 1
-            var info = CMSampleTimingInfo()
-            CMSampleBufferGetSampleTimingInfoArray(buff, count, &info, &count)
-            info.presentationTimeStamp = CMTimeSubtract(info.presentationTimeStamp, offsetTime)
-            CMSampleBufferCreateCopyWithNewTiming(kCFAllocatorDefault, buff, 1, &info, &copyBuffer)
-            // 最後のデータの時間を保存
-            lastTime = CMSampleBufferGetPresentationTimeStamp(buff)
-            
-            if recordingTime > CMTimeMake(Int64(_recordingTime), 1) {
+            if isVideo && writer.status == .unknown {
                 
-                writer.finishWriting {
-                    
-                    DispatchQueue.main.async {
-                        
-                        self.delegate?.finish(fileUrl: self.writer.outputURL)
-                    }
-                }
-                status = .end
-                return
+                offsetTime = CMSampleBufferGetPresentationTimeStamp(buff)
+                writer.startWriting()
+                writer.startSession(atSourceTime: kCMTimeZero)
             }
             
-            if isVideo {
+            if writer.status == .writing {
                 
-                if videoInput.isReadyForMoreMediaData {
+                // Offset分だけ調整
+                var copyBuffer: CMSampleBuffer?
+                var count: CMItemCount = 1
+                var info = CMSampleTimingInfo()
+                CMSampleBufferGetSampleTimingInfoArray(buff, count, &info, &count)
+                info.presentationTimeStamp = CMTimeSubtract(info.presentationTimeStamp, offsetTime)
+                CMSampleBufferCreateCopyWithNewTiming(kCFAllocatorDefault, buff, 1, &info, &copyBuffer)
+                // 最後のデータの時間を保存
+                lastTime = CMSampleBufferGetPresentationTimeStamp(buff)
+                
+                if recordingTime > CMTimeMake(Int64(_recordingTime), 1) {
                     
-                    videoInput.append(copyBuffer!)
+                    writer.finishWriting {
+                        
+                        DispatchQueue.main.async {
+                            
+                            self.delegate?.finish(fileUrl: self.writer.outputURL)
+                        }
+                    }
+                    status = .end
+                    return
                 }
-            } else {
                 
-                if audioInput.isReadyForMoreMediaData {
+                if isVideo {
                     
-                    audioInput.append(copyBuffer!)
+                    if videoInput.isReadyForMoreMediaData {
+                        
+                        videoInput.append(copyBuffer!)
+                    }
+                } else {
+                    
+                    if audioInput.isReadyForMoreMediaData {
+                        
+                        audioInput.append(copyBuffer!)
+                    }
                 }
             }
         }

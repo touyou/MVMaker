@@ -39,7 +39,6 @@ class RecordingViewController: UIViewController {
         super.viewDidAppear(animated)
         
         setupVideo()
-        indicator.stopAnimating()
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,7 +72,10 @@ class RecordingViewController: UIViewController {
         
         videoManager = VideoManager()
         videoManager?.delegate = self
-        videoManager?.setup(previewView: videoView, recordingTime: recordingTime)
+        videoManager?.setup(previewView: videoView, recordingTime: recordingTime, completion: {
+            
+            self.indicator.stopAnimating()
+        })
         view.sendSubview(toBack: videoView)
     }
     
@@ -100,10 +102,6 @@ extension RecordingViewController: VideoManagerDelegate {
         let range = CMTimeRange(start: kCMTimeZero, duration: asset.duration)
         let videoTrack = asset.tracks(withMediaType: AVMediaTypeVideo).first!
         try? compositionVideoTrack.insertTimeRange(range, of: videoTrack, at: kCMTimeZero)
-        if let audioTrack = asset.tracks(withMediaType: AVMediaTypeAudio).first {
-            
-            try? compositionAudioTrack.insertTimeRange(range, of: audioTrack, at: kCMTimeZero)
-        }
         let instruction = AVMutableVideoCompositionInstruction()
         instruction.timeRange = range
         let layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: compositionVideoTrack)
@@ -115,10 +113,14 @@ extension RecordingViewController: VideoManagerDelegate {
             let soundTrack = soundAsset.tracks(withMediaType: AVMediaTypeAudio).first!
             let compositionSoundTrack = composition.addMutableTrack(withMediaType: AVMediaTypeAudio, preferredTrackID: kCMPersistentTrackID_Invalid)
             // 音楽の早さは変えずに動画を基準にするため
+            // 加えてここで最後の部分の音は保存する
             if range.duration > soundAsset.duration {
                 
                 let soundRange = CMTimeRange(start: kCMTimeZero, duration: soundAsset.duration)
                 try? compositionSoundTrack.insertTimeRange(soundRange, of: soundTrack, at: kCMTimeZero)
+                let audioRange = CMTimeRange(start: kCMTimeZero + soundAsset.duration, end: range.end)
+                let audioTrack = asset.tracks(withMediaType: AVMediaTypeAudio).first!
+                try? compositionAudioTrack.insertTimeRange(audioRange, of: audioTrack, at: kCMTimeZero)
             } else {
                 
                 try? compositionSoundTrack.insertTimeRange(range, of: soundTrack, at: kCMTimeZero)
