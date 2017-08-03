@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         pageControl.pageIndicatorTintColor = UIColor.lightGray
         pageControl.currentPageIndicatorTintColor = UIColor.white
         pageControl.backgroundColor = UIColor.clear
+        
+        // ミュートでも音楽は鳴らす
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         
         return true
     }
