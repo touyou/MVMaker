@@ -15,7 +15,7 @@ class TutorialPageViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageData = []
+        pageData = [UIImage(named: "tutorial1")!, UIImage(named: "tutorial2")!, UIImage(named: "tutorial3")!]
         currentIndex = 0
         
         self.delegate = self
@@ -25,6 +25,7 @@ class TutorialPageViewController: UIPageViewController {
         self.setViewControllers(viewControllers, direction: .forward, animated: false, completion: nil)
         
         self.dataSource = self
+        self.view.backgroundColor = UIColor.darkGray
         self.view.gestureRecognizers = self.gestureRecognizers
     }
 

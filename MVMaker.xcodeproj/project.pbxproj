@@ -31,8 +31,8 @@
 		460F67181F33426100A08777 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		460F671C1F33459F00A08777 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		460F671F1F3347A500A08777 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
-		4615F6581F31C1920098443C /* VideoWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoWriter.swift; path = Helper/VideoWriter.swift; sourceTree = "<group>"; };
-		4615F65A1F31C9FC0098443C /* VideoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoManager.swift; path = Helper/VideoManager.swift; sourceTree = "<group>"; };
+		4615F6581F31C1920098443C /* VideoWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoWriter.swift; sourceTree = "<group>"; };
+		4615F65A1F31C9FC0098443C /* VideoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
 		464D5E231F2B0FF200CD2956 /* MVMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		464D5E261F2B0FF200CD2956 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		464D5E2B1F2B0FF200CD2956 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Prototype.storyboard; sourceTree = "<group>"; };
@@ -41,12 +41,12 @@
 		464D5E321F2B0FF200CD2956 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		464D5E381F2B103800CD2956 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		464D5E3A1F2B104A00CD2956 /* MainViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainViewController.storyboard; sourceTree = "<group>"; };
-		464D5E3F1F2B135A00CD2956 /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleImageView.swift; path = Views/CircleImageView.swift; sourceTree = "<group>"; };
-		464D5E431F2B189D00CD2956 /* MovieEditingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieEditingButton.swift; path = Views/MovieEditingButton.swift; sourceTree = "<group>"; };
+		464D5E3F1F2B135A00CD2956 /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
+		464D5E431F2B189D00CD2956 /* MovieEditingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieEditingButton.swift; sourceTree = "<group>"; };
 		465227771F32CC8D0050ED77 /* CustomAVPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAVPlayerViewController.swift; sourceTree = "<group>"; };
 		46F765161F30B17600747652 /* ConfirmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
 		46F765181F30B18300747652 /* ConfirmViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ConfirmViewController.storyboard; sourceTree = "<group>"; };
-		46F7651B1F30B2F600747652 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicManager.swift; path = Helper/MusicManager.swift; sourceTree = "<group>"; };
+		46F7651B1F30B2F600747652 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		46F7651D1F30B91C00747652 /* RecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingViewController.swift; sourceTree = "<group>"; };
 		46F7651F1F30B92900747652 /* RecordingViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RecordingViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,10 +81,10 @@
 		464D5E251F2B0FF200CD2956 /* MVMaker */ = {
 			isa = PBXGroup;
 			children = (
-				46F7651A1F30B2D500747652 /* Helper */,
-				464D5E3E1F2B132700CD2956 /* Views */,
 				464D5E3D1F2B109300CD2956 /* Assets */,
+				46F7651A1F30B2D500747652 /* Helper */,
 				464D5E3C1F2B107E00CD2956 /* ViewControllers */,
+				464D5E3E1F2B132700CD2956 /* Views */,
 				464D5E261F2B0FF200CD2956 /* AppDelegate.swift */,
 				464D5E321F2B0FF200CD2956 /* Info.plist */,
 				464D5E2F1F2B0FF200CD2956 /* LaunchScreen.storyboard */,
@@ -95,16 +95,16 @@
 		464D5E3C1F2B107E00CD2956 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				464D5E3A1F2B104A00CD2956 /* MainViewController.storyboard */,
-				464D5E381F2B103800CD2956 /* MainViewController.swift */,
 				46F765181F30B18300747652 /* ConfirmViewController.storyboard */,
 				46F765161F30B17600747652 /* ConfirmViewController.swift */,
+				465227771F32CC8D0050ED77 /* CustomAVPlayerViewController.swift */,
+				464D5E3A1F2B104A00CD2956 /* MainViewController.storyboard */,
+				464D5E381F2B103800CD2956 /* MainViewController.swift */,
+				460F671F1F3347A500A08777 /* PageViewController.swift */,
 				46F7651F1F30B92900747652 /* RecordingViewController.storyboard */,
 				46F7651D1F30B91C00747652 /* RecordingViewController.swift */,
-				465227771F32CC8D0050ED77 /* CustomAVPlayerViewController.swift */,
-				460F67181F33426100A08777 /* TutorialViewController.swift */,
 				460F671C1F33459F00A08777 /* TutorialPageViewController.swift */,
-				460F671F1F3347A500A08777 /* PageViewController.swift */,
+				460F67181F33426100A08777 /* TutorialViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -124,17 +124,17 @@
 				464D5E3F1F2B135A00CD2956 /* CircleImageView.swift */,
 				464D5E431F2B189D00CD2956 /* MovieEditingButton.swift */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		46F7651A1F30B2D500747652 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
 				46F7651B1F30B2F600747652 /* MusicManager.swift */,
-				4615F6581F31C1920098443C /* VideoWriter.swift */,
 				4615F65A1F31C9FC0098443C /* VideoManager.swift */,
+				4615F6581F31C1920098443C /* VideoWriter.swift */,
 			);
-			name = Helper;
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -24,34 +24,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSX-Pb-Mja">
-                                <rect key="frame" x="0.0" y="0.0" width="667" height="325"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                                 <connections>
                                     <segue destination="0GB-pz-2Zr" kind="embed" id="Lly-2H-ay3"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Drn-sz-Vwg">
-                                <rect key="frame" x="0.0" y="325" width="667" height="50"/>
-                                <color key="backgroundColor" red="0.8462415337562561" green="0.28384819626808167" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JFC-SL-4YP" customClass="MovieEditingButton" customModule="MVMaker" customModuleProvider="target">
+                                <rect key="frame" x="20" y="30" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="k5z-7g-txm"/>
+                                    <constraint firstAttribute="height" constant="40" id="jiS-uE-NsR"/>
+                                    <constraint firstAttribute="width" constant="40" id="trD-be-e6e"/>
                                 </constraints>
-                                <state key="normal" title="Button">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                <state key="normal" title="×">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="okButton" destination="q45-wh-zCu" eventType="touchUpInside" id="eVe-iO-PJx"/>
+                                    <action selector="okButton" destination="q45-wh-zCu" eventType="touchUpInside" id="nqW-ip-NIP"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="JFC-SL-4YP" firstAttribute="top" secondItem="96x-Oj-yVi" secondAttribute="bottom" constant="10" id="14r-hc-fyr"/>
                             <constraint firstAttribute="trailing" secondItem="dSX-Pb-Mja" secondAttribute="trailing" id="4r1-c6-4jt"/>
                             <constraint firstItem="dSX-Pb-Mja" firstAttribute="top" secondItem="JGq-Iy-85l" secondAttribute="top" id="DJN-It-zsu"/>
+                            <constraint firstItem="wq0-Nj-OQw" firstAttribute="top" secondItem="dSX-Pb-Mja" secondAttribute="bottom" id="OO7-Ov-OiX"/>
                             <constraint firstItem="dSX-Pb-Mja" firstAttribute="leading" secondItem="JGq-Iy-85l" secondAttribute="leading" id="SYH-Z5-5OE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Drn-sz-Vwg" secondAttribute="trailing" constant="-20" id="Ur0-M4-O6f"/>
-                            <constraint firstItem="Drn-sz-Vwg" firstAttribute="leading" secondItem="JGq-Iy-85l" secondAttribute="leadingMargin" constant="-20" id="V8h-0U-YTa"/>
-                            <constraint firstItem="Drn-sz-Vwg" firstAttribute="top" secondItem="dSX-Pb-Mja" secondAttribute="bottom" id="Yaj-vM-hhS"/>
-                            <constraint firstItem="wq0-Nj-OQw" firstAttribute="top" secondItem="Drn-sz-Vwg" secondAttribute="bottom" id="dqb-q4-NqZ"/>
+                            <constraint firstItem="JFC-SL-4YP" firstAttribute="leading" secondItem="JGq-Iy-85l" secondAttribute="leadingMargin" id="vps-qN-Re0"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -130,7 +139,7 @@
         <!--Tutorial Page View Controller-->
         <scene sceneID="p2O-8I-PLb">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="0GB-pz-2Zr" customClass="TutorialPageViewController" customModule="MVMaker" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0GB-pz-2Zr" customClass="TutorialPageViewController" customModule="MVMaker" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nX7-Tl-AMl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="604" y="-706"/>
