@@ -24,9 +24,9 @@ class MainViewController: UIViewController {
             #if DEBUG
                 self.performSegue(withIdentifier: "toTutorialViewController", sender: nil)
             #else
-                if let isFirst = cached.object(forKey: "isFirst") as? Bool {
+                if (self.cached.object(forKey: "isFirst") as? Bool) != nil {
                     
-                    cached.set(true, forKey: "isFirst")
+                    self.cached.set(true, forKey: "isFirst")
                     self.performSegue(withIdentifier: "toTutorialViewController", sender: nil)
                 }
             #endif

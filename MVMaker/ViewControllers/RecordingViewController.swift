@@ -15,7 +15,10 @@ import Photos
 class RecordingViewController: UIViewController {
     
     @IBOutlet weak var videoView: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
     let indicator = UIActivityIndicatorView()
+    var timer: Timer!
+    var time = 0
     
     let musicManager = MusicManager.shared
     var videoManager: VideoManager?
@@ -56,18 +59,22 @@ class RecordingViewController: UIViewController {
             videoManager?.resume()
         }
         musicManager.play()
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
+        timer.fire()
     }
     
     @IBAction func touchUpRecordButton() {
         
         videoManager?.pause()
         musicManager.pause()
+        timer.invalidate()
     }
     
     @IBAction func tappedEndButton() {
         
         // MARK: indicator
         indicator.startAnimating()
+        timer.invalidate()
         
         videoManager?.stop()
         musicManager.stop()
@@ -85,6 +92,13 @@ class RecordingViewController: UIViewController {
         view.sendSubview(toBack: videoView)
     }
     
+    @objc fileprivate func update() {
+        
+        time += 1
+        let sec = time % 60
+        let min = time / 60
+        timeLabel.text = String(format: "%02d:%02d ", min, sec) + (musicManager.count == 0 ? "♪" : " ")
+    }
 }
 
 extension RecordingViewController: VideoManagerDelegate {
